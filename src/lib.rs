@@ -3,8 +3,8 @@ use serde::Serialize;
 use url::Url;
 
 pub struct LucidKVClient {
-    http_client: Client,
-    base_url: Url,
+    pub http_client: Client,
+    pub(crate) base_url: Url,
     jwt: Option<String>,
 }
 
@@ -25,7 +25,7 @@ impl LucidKVClient {
         }
     }
 
-    /// Stores data into Lucid db
+    /// Stores data into Lucid DB
     pub async fn store_data<T>(&self, key: String, data: T) -> Result<Response, Error>
     where
         T: serde::Serialize,
@@ -34,7 +34,7 @@ impl LucidKVClient {
 
         self.http_client.put(url).json(&data).send().await
     }
-
+    /// Gets data from Lucid DB
     pub async fn get_data(&self, key: String) -> Result<Response, Error> {
         let url: Url = self.base_url.join(&key).unwrap();
         self.http_client.get(url).send().await
