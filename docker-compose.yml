@@ -1,0 +1,11 @@
+version: "3.6"
+
+services:
+  database:
+    build:
+      context: ./.docker
+      dockerfile: lucid.dockerfile
+    ports:
+      - 7020:7020
+    volumes:
+      - ./db:/lucid/data

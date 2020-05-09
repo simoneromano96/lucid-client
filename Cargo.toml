@@ -1,0 +1,25 @@
+[package]
+name = "lucid-client"
+version = "0.1.0"
+authors = ["Simone Romano <simoneromano@tutanota.de>"]
+edition = "2018"
+licence = "MIT OR Apache-2.0"
+licence_file = "./.licence/COPYRIGHT"
+description = "LucidKV DB Client based on Reqwest"
+homepage = "https://github.com/simoneromano96/lucid-client"
+documentation = ""
+repository = "https://github.com/simoneromano96/lucid-client"
+readme = "readme.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# TypeSafe URLs
+url = "2.1.1"
+# For serializable traits
+serde = "1.0.107"
+
+# HTTP Client to interact with LucidKV DB
+[dependencies.reqwest]
+version = "0.10.4"
+features = ["rustls-tls", "json"]

@@ -1,0 +1,33 @@
+---
+general:
+  bind_address: 0.0.0.0
+  port: 7020
+  port_ssl: 7021
+  use_ssl: false
+  ssl_certificate: ""
+  ssl_certificate_key: ""
+  show_banner: true
+authentication:
+  enabled: false
+  root_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWNpZCBSb290IFRva2VuIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo3MDIxLyIsImlhdCI6MTU4OTAzNjk1MiwiZXhwIjoxNjgzMzg1NzUyfQ.76YjFkSA-YPOzbSqVZVSo8LGdGN36HfHutt3HQWxboc
+  secret_key: 09fda530580f8b63885e3c794e2b15ea7202006cd345241d476d4d244a4c6165
+persistence:
+  enabled: false
+  location: ""
+encryption:
+  enabled: false
+  private_key: f2fadeb6df8fd60c216367deb3b76a8a78d2b8d8728024fa
+  iv: b6a2f6ceee0ddbb74308adc6d07f572f
+webui:
+  enabled: false
+store:
+  max_limit: 7340032
+http:
+  request_size_limit: 8388608
+logging:
+  level: INFO
+  outputs:
+    - type: stdout
+      colored: false
+sse:
+  enabled: false
