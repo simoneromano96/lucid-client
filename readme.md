@@ -79,10 +79,14 @@ let res = lucid_client.store_data("key".into(), data).await?;
 assert_eq!(res.status(), reqwest::StatusCode::OK);
 
 // Delete
-// TODO
+let res = lucid_client.delete_data("something".into()).await.unwrap();
+
+assert_eq!(res.status(), reqwest::StatusCode::OK);
 
 // Has key
-// TODO
+let res = lucid_client.is_key_present("not-present".into()).await;
+
+assert_eq!(res, false);
 
 ```
 

@@ -45,6 +45,46 @@ async fn store_data() {
 async fn get_data() {
     let lucid_client = LucidKVClient::new(None);
 
+    let data = DemoData {
+        demo: "Something".into(),
+    };
+
+    let res_create = lucid_client.store_data("something".into(), data).await;
+    assert_eq!(res_create.unwrap().status(), reqwest::StatusCode::OK);
+
     let res = lucid_client.get_data("something".into()).await.unwrap();
     assert_eq!(res.status(), reqwest::StatusCode::OK);
+}
+
+#[tokio::test]
+async fn delete_data() {
+    let lucid_client = LucidKVClient::new(None);
+
+    let data = DemoData {
+        demo: "Something".into(),
+    };
+
+    let res_create = lucid_client.store_data("something".into(), data).await;
+    assert_eq!(res_create.unwrap().status(), reqwest::StatusCode::OK);
+
+    let res = lucid_client.delete_data("something".into()).await.unwrap();
+    assert_eq!(res.status(), reqwest::StatusCode::OK);
+}
+
+#[tokio::test]
+async fn is_key_present() {
+    let lucid_client = LucidKVClient::new(None);
+
+    let res = lucid_client.is_key_present("not-present".into()).await;
+    assert_eq!(res, false);
+
+    let data = DemoData {
+        demo: "Something".into(),
+    };
+
+    let res = lucid_client.store_data("present".into(), data).await;
+    assert_eq!(res.unwrap().status(), reqwest::StatusCode::OK);
+
+    let res = lucid_client.is_key_present("present".into()).await;
+    assert_eq!(res, true);
 }
