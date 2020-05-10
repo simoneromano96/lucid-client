@@ -11,8 +11,12 @@ homepage = "https://github.com/simoneromano96/lucid-client"
 repository = "https://github.com/simoneromano96/lucid-client"
 readme = "readme.md"
 exclude = [
-    "./.docker/*",
-    "./.licence/*",
+    ".docker/*",
+    ".licence/*",
+    ".github/*",
+    "drone.yml",
+    "readme.md",
+    ".gitignore",
     "docker-compose.yml"
 ]
 

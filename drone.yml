@@ -1,0 +1,21 @@
+kind: pipeline
+name: test-latest
+type: docker
+
+steps:
+  - name: test
+    image: rust
+    commands:
+      - cargo build --verbose --all
+      - cargo test --verbose --all
+
+---
+kind: pipeline
+name: test-latest-alpine
+
+steps:
+  - name: test
+    image: rust:alpine
+    commands:
+      - cargo build --verbose --all
+      - cargo test --verbose --all

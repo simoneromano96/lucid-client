@@ -7,5 +7,3 @@ services:
       dockerfile: lucid.dockerfile
     ports:
       - 7020:7020
-    volumes:
-      - ./db:/lucid/data
