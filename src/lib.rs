@@ -4,7 +4,7 @@ use url::Url;
 
 pub struct LucidKVClient {
     pub http_client: Client,
-    pub(crate) base_url: Url,
+    pub base_url: Url,
     jwt: Option<String>,
 }
 
@@ -28,7 +28,7 @@ impl LucidKVClient {
     /// Stores data into Lucid DB
     pub async fn store_data<T>(&self, key: String, data: T) -> Result<Response, Error>
     where
-        T: serde::Serialize,
+        T: Serialize,
     {
         let url: Url = self.base_url.join(&key).unwrap();
 
@@ -48,32 +48,5 @@ impl LucidKVClient {
     pub async fn is_key_present(&self, key: String) -> Result<Response, Error> {
         let url: Url = self.base_url.join(&key).unwrap();
         self.http_client.head(url).send().await
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::LucidKVClient;
-    use url::Url;
-
-    // use reqwest;
-    #[test]
-    fn new_client() {
-        let lucid_client = LucidKVClient::new(None);
-
-        assert_eq!(
-            lucid_client.base_url,
-            Url::parse("http://127.0.0.1:7020/api/kv/").unwrap()
-        );
-    }
-
-    #[test]
-    fn new_client_with_url() {
-        let lucid_client = LucidKVClient::new(Some("http://1.2.3.4:7020".into()));
-
-        assert_eq!(
-            lucid_client.base_url,
-            Url::parse("http://1.2.3.4:7020/api/kv/").unwrap()
-        );
     }
 }
