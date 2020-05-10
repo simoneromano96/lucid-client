@@ -30,3 +30,20 @@ let lucid_client_1 = LucidKVClient::new(None);
 // With a base URL
 let lucid_client_2 = LucidKVClient::new(Some("http://1.2.3.4:7020".into()));
 ```
+
+Operations:
+
+```rust
+let lucid_client = LucidKVClient::new(None);
+
+// Create
+
+// Read
+
+// Update
+
+// Delete
+
+// Has key
+
+```
