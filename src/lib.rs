@@ -1,3 +1,4 @@
+/// LucidKV Client
 use reqwest::{Client, Error, Response};
 use serde::Serialize;
 use url::Url;
@@ -26,6 +27,7 @@ impl LucidKVClient {
     }
 
     /// Stores data into Lucid DB
+    /// Will panic if key is not URI safe
     pub async fn store_data<T>(&self, key: String, data: T) -> Result<Response, Error>
     where
         T: Serialize,
@@ -34,19 +36,28 @@ impl LucidKVClient {
 
         self.http_client.put(url).json(&data).send().await
     }
+
     /// Gets data from Lucid DB
+    /// Will panic if key is not URI safe
     pub async fn get_data(&self, key: String) -> Result<Response, Error> {
         let url: Url = self.base_url.join(&key).unwrap();
         self.http_client.get(url).send().await
     }
 
+    /// Delete data from Lucid DB
+    /// Will panic if key is not URI safe
     pub async fn delete_data(&self, key: String) -> Result<Response, Error> {
         let url: Url = self.base_url.join(&key).unwrap();
         self.http_client.delete(url).send().await
     }
 
-    pub async fn is_key_present(&self, key: String) -> Result<Response, Error> {
+    /// Sends HEAD request to Lucid DB, will return true if key is present
+    /// Will panic if key is not URI safe
+    pub async fn is_key_present(&self, key: String) -> bool {
         let url: Url = self.base_url.join(&key).unwrap();
-        self.http_client.head(url).send().await
+        match self.http_client.head(url).send().await.unwrap() {
+            res => res.status() == reqwest::StatusCode::OK,
+            _ => false,
+        }
     }
 }

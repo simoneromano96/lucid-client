@@ -1,6 +1,6 @@
 [package]
 name = "lucid-client"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Simone Romano <simoneromano@protonmail.ch>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -22,7 +22,8 @@ exclude = [
 # TypeSafe URLs
 url = "2.1.1"
 # For serializable traits
-serde = "1.0.107"
+# TODO: see if I can only use the traits
+serde = "1.0.110"
 
 # HTTP Client to interact with LucidKV DB
 [dependencies.reqwest]
@@ -30,9 +31,12 @@ version = "0.10.4"
 features = ["rustls-tls", "json"]
 
 [dev-dependencies]
-serde_derive = "1.0.107"
+# To serialize and deserialize
+serde_derive = "1.0.110"
+# For async fn tests
 tokio = { version = "0.2.20", features = ["macros"] }
 
+# Tests
 [[test]]
 name = "client"
 path = "tests/client.rs"

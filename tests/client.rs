@@ -40,3 +40,11 @@ async fn store_data() {
     let res = lucid_client.store_data("something".into(), data).await;
     assert_eq!(res.unwrap().status(), reqwest::StatusCode::OK);
 }
+
+#[tokio::test]
+async fn get_data() {
+    let lucid_client = LucidKVClient::new(None);
+
+    let res = lucid_client.get_data("something".into()).await.unwrap();
+    assert_eq!(res.status(), reqwest::StatusCode::OK);
+}
