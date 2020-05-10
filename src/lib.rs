@@ -55,8 +55,8 @@ impl LucidKVClient {
     /// Will panic if key is not URI safe
     pub async fn is_key_present(&self, key: String) -> bool {
         let url: Url = self.base_url.join(&key).unwrap();
-        match self.http_client.head(url).send().await.unwrap() {
-            res => res.status() == reqwest::StatusCode::OK,
+        match self.http_client.head(url).send().await {
+            Ok(res) => res.status() == reqwest::StatusCode::OK,
             _ => false,
         }
     }
